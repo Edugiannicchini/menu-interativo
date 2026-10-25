@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picanha do Sierra - Cardápio Interativo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+      <div>
+        <h1>Picanha do Sierra</h1>
+        <p class="subtitle">O melhor da grelha na sua mesa</p>
+      </div>
+    </div>
+    <button class="cart-btn" id="open-cart-btn">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </header>
+
+  <!-- CATEGORIES -->
+  <nav class="categories-bar">
+    <button class="category-btn active" data-category="all">Todos</button>
+    <button class="category-btn" data-category="porcoes">Porções</button>
+    <button class="category-btn" data-category="pratos">Pratos Feitos</button>
+    <button class="category-btn" data-category="bebidas">Bebidas</button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <div class="products-grid" id="products-grid"></div>
+  </main>
+
+  <!-- MODAL DE PERSONALIZAÇÃO -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal">
+      <button class="modal-close" id="close-modal">&times;</button>
+      <div class="modal-header">
+        <img id="modal-img" src="" alt="Produto">
+        <h2 id="modal-title"></h2>
+        <p id="modal-desc" class="modal-desc"></p>
+      </div>
+      <div class="modal-body">
+        
+        <!-- PONTO DA CARNE -->
+        <div id="doneness-section" class="custom-group hidden">
+          <h3>Ponto da Carne</h3>
+          <div class="radio-options">
+            <label><input type="radio" name="doneness" value="Mal Passada"> Mal Passada</label>
+            <label><input type="radio" name="doneness" value="Ao Ponto" checked> Ao Ponto</label>
+            <label><input type="radio" name="doneness" value="Bem Passada"> Bem Passada</label>
+          </div>
+        </div>
+
+        <!-- REMOVER ITENS -->
+        <div id="removables-section" class="custom-group hidden">
+          <h3>Remover Ingredientes</h3>
+          <div id="removables-list" class="checkbox-options"></div>
+        </div>
+
+        <!-- ADICIONAIS -->
+        <div id="extras-section" class="custom-group hidden">
+          <h3>Adicionais</h3>
+          <div id="extras-list" class="checkbox-options"></div>
+        </div>
+
+        <!-- OBSERVAÇÕES -->
+        <div class="custom-group">
+          <h3>Observações</h3>
+          <textarea id="modal-obs" placeholder="Ex: Capricha no alho, sem talheres plásticos..."></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="quantity-control">
+          <button id="qty-minus">-</button>
+          <span id="qty-value">1</span>
+          <button id="qty-plus">+</button>
+        </div>
+        <button id="add-to-cart-btn" class="btn-primary">
+          Adicionar <span id="modal-total-price">R$ 0,00</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER DO CARRINHO -->
+  <div class="cart-drawer-overlay" id="cart-drawer">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h2>Seu Pedido</h2>
+        <button id="close-cart">&times;</button>
+      </div>
+      <div class="cart-body" id="cart-items-list"></div>
+      <div class="cart-footer">
+        <div class="cart-summary">
+          <span>Total:</span>
+          <strong id="cart-total-price">R$ 0,00</strong>
+        </div>
+        <button id="checkout-btn" class="btn-primary">Finalizar Pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKOUT -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal">
+      <button class="modal-close" id="close-checkout">&times;</button>
+      <div class="modal-header">
+        <h2>Confirmação do Pedido</h2>
+      </div>
+      <div class="modal-body">
+        <div class="custom-group">
+          <h3>Forma de Pagamento</h3>
+          <select id="payment-method">
+            <option value="PIX">PIX</option>
+            <option value="Cartão de Crédito">Cartão de Crédito</option>
+            <option value="Cartão de Débito">Cartão de Débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+          </select>
+        </div>
+        <div class="custom-group">
+          <h3>Número da Mesa / Retirada</h3>
+          <input type="text" id="table-number" placeholder="Ex: Mesa 04 ou Retirada Balcão" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirm-order-btn" class="btn-primary">Confirmar e Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
